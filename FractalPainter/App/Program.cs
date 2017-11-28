@@ -6,6 +6,7 @@ namespace FractalPainting.App
 {
     internal static class Program
     {
+        /*
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
@@ -22,6 +23,6 @@ namespace FractalPainting.App
             {
                 MessageBox.Show(e.Message);
             }
-        }
+        } */
     }
 }
