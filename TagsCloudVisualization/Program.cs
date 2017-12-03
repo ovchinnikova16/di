@@ -19,6 +19,9 @@ namespace TagsCloudVisualization
             container.RegisterType<CircularCloudLayouter>()
                 .As<ICircularCloudLayouter>()
                 .WithParameter("cloudCenter", cloudCenter);
+            container.RegisterType<RectangleLocator>()
+                .As<IRectangleLocator>()
+                .WithParameter("cloudCenter", cloudCenter);
             container.RegisterType<Reader>()
                 .As<IReader>()
                 .WithParameter("fileName", fileName);

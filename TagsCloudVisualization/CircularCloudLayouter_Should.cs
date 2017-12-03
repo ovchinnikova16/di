@@ -12,7 +12,7 @@ namespace TagsCloudVisualization
         [Test]
         public void When_PutNextRectangle_Throw_IfNotPozitiveSize()
         {
-            var cloud = new CircularCloudLayouter(new Point(5, 5));
+            var cloud = new CircularCloudLayouter(new RectangleLocator(new Point(5, 5)), new Point(5, 5));
             Assert.Throws<ArgumentException>(() => cloud.PutNextRectangle(new Size(-1, 1)));
         }
 
@@ -20,7 +20,7 @@ namespace TagsCloudVisualization
         [TestCase(3, 3, 4, 4)]
         public void Put_FirstRectangle_InCloudCenter(int width, int height, int topX, int topY)
         {
-            var cloud = new CircularCloudLayouter(new Point(5, 5));
+            var cloud = new CircularCloudLayouter(new RectangleLocator(new Point(5, 5)),  new Point(5, 5));
 
             var rectangle = cloud.PutNextRectangle(new Size(width, height));
 
@@ -33,7 +33,7 @@ namespace TagsCloudVisualization
         [TestCase(3, 3, 4, 4)]
         public void Put_TwoRectangles_ShouldNotIntersect(int size1X, int size1Y, int size2X, int size2Y)
         {
-            var cloud = new CircularCloudLayouter(new Point(10, 10));
+            var cloud = new CircularCloudLayouter(new RectangleLocator(new Point(10, 10)), new Point(10, 10));
 
             var firstRectangle = cloud.PutNextRectangle(new Size(size1X, size1Y));
             var secondRectangle = cloud.PutNextRectangle(new Size(size2X, size2Y));
@@ -44,7 +44,7 @@ namespace TagsCloudVisualization
         [Test]
         public void Put_SeveralRectangles_ShouldBeNotFarFromCloudCenter()
         {
-            var cloud = new CircularCloudLayouter(new Point(20, 20));
+            var cloud = new CircularCloudLayouter(new RectangleLocator(new Point(20, 20)), new Point(20, 20));
             var rectangles = new List<Rectangle>();
 
             for (int i = 0; i < 5; i++)

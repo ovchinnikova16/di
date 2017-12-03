@@ -9,12 +9,13 @@ namespace TagsCloudVisualization
     {
         private Point cloudCenter;
         private readonly List<Rectangle> rectangles;
-        private int distance;
+        private readonly IRectangleLocator rectangleLocator;
 
-        public CircularCloudLayouter(Point cloudCenter)
+        public CircularCloudLayouter(IRectangleLocator rectangleLocator, Point cloudCenter)
         {
             this.cloudCenter = cloudCenter;
             rectangles = new List<Rectangle>();
+            this.rectangleLocator = rectangleLocator;
         }
 
         public Rectangle PutNextRectangle(Size rectangleSize)
@@ -22,46 +23,9 @@ namespace TagsCloudVisualization
             if (rectangleSize.Width <= 0 || rectangleSize.Height <= 0)
                 throw new ArgumentException("Rectangle size is not positive");
 
-            var rectangle = new Rectangle(FindLocation(rectangleSize), rectangleSize);
+            var rectangle = new Rectangle(rectangleLocator.FindLocation(rectangleSize, rectangles), rectangleSize);
             rectangles.Add(rectangle);
             return rectangle;
-        }
-
-        private Point FindLocation(Size rectangleSize)
-        {
-            if (rectangles.Count == 0)
-            {
-                var shiftX = rectangleSize.Width / 2;
-                var shiftY = rectangleSize.Height / 2;
-                return new Point(cloudCenter.X - shiftX, cloudCenter.Y - shiftY);
-            }
-
-            var points = GetTop().GetEnumerator();
-            points.MoveNext();
-            var rectangle = new Rectangle(points.Current, rectangleSize);
-            while (rectangles.Any(rect => rect.IntersectsWith(rectangle)))
-            {
-                points.MoveNext();
-                rectangle.X = points.Current.X;
-                rectangle.Y = points.Current.Y;
-            }
-            return points.Current;
-        }
-
-        private IEnumerable<Point> GetTop()
-        {
-            while (true)
-            {
-                for (int i = 0; i < 360; i += 10)
-                {
-                    yield return
-                        new Point(
-                            cloudCenter.X + Convert.ToInt32(distance * Math.Cos(i / Math.PI * 180)),
-                            cloudCenter.Y + Convert.ToInt32(distance * Math.Sin(i / Math.PI * 180))
-                        );
-                }
-                distance += 1;
-            }
         }
     }
 }

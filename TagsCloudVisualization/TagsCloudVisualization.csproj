@@ -76,6 +76,7 @@
     <Compile Include="IDrawer.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="IReader.cs" />
+    <Compile Include="IRectangleLocator.cs" />
     <Compile Include="ITagsMaker.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="RectangleLocator.cs" />
