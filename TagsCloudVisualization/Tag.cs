@@ -3,7 +3,7 @@
 
 namespace TagsCloudVisualization
 {
-    class Tag
+    public class Tag
     {
         public string Word;
         public Font Font;

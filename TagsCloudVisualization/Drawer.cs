@@ -3,9 +3,9 @@ using System.Drawing;
 
 namespace TagsCloudVisualization
 {
-    class Drawer
+    class Drawer : IDrawer
     {
-        public static void DrawRectangles(List<Rectangle> rectangles, Point cloudCenter, string fileName, Size size)
+        public void DrawRectangles(List<Rectangle> rectangles, Point cloudCenter, string fileName, Size size)
         {
             var bitmap = new Bitmap(size.Width, size.Height);
             var g = Graphics.FromImage(bitmap);
@@ -18,7 +18,7 @@ namespace TagsCloudVisualization
             bitmap.Save(fileName);
         }
 
-        public static void DrawTags(List<Tag> tags, Point cloudCenter, string fileName, Size size)
+        public void DrawTags(List<Tag> tags, string fileName, Size size)
         {
             var bitmap = new Bitmap(size.Width, size.Height);
             var g = Graphics.FromImage(bitmap);

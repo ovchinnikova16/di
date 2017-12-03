@@ -5,9 +5,16 @@ using System.Windows.Forms;
 
 namespace TagsCloudVisualization
 {
-    class TagsMaker
+    public class TagsMaker : ITagsMaker
     {
-        public List<Tag> MakeTags(Dictionary<string, int> frequency, CircularCloudLayouter layout)
+        private readonly ICircularCloudLayouter cloudLayouter;
+
+        TagsMaker(ICircularCloudLayouter cloudLayouter)
+        {
+            this.cloudLayouter = cloudLayouter;
+        }
+
+        public List<Tag> MakeTags(Dictionary<string, int> frequency)
         {
             var tags = new List<Tag>();
             var minSize = 10;
@@ -22,7 +29,7 @@ namespace TagsCloudVisualization
                                     FontStyle.Regular, 
                                     GraphicsUnit.Pixel);
                 var rectangleSize = TextRenderer.MeasureText(word.Key, font);
-                var rectangle = layout.PutNextRectangle(rectangleSize);
+                var rectangle = cloudLayouter.PutNextRectangle(rectangleSize);
                 tags.Add(new Tag(word.Key, font, rectangle));
             }
 

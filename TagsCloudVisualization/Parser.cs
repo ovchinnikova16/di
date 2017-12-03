@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace TagsCloudVisualization
 {
-    class Parser
+    class Parser : IParser
     {
         public Dictionary<string, int> GetFrequency(IEnumerable<string> text, int wordsNumber)
         {
