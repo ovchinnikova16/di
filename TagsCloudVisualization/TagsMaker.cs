@@ -8,10 +8,12 @@ namespace TagsCloudVisualization
     public class TagsMaker : ITagsMaker
     {
         private readonly ICircularCloudLayouter cloudLayouter;
+        private readonly FontFamily fontFamily; 
 
-        public TagsMaker(ICircularCloudLayouter cloudLayouter)
+        public TagsMaker(ICircularCloudLayouter cloudLayouter, FontFamily fontFamily)
         {
             this.cloudLayouter = cloudLayouter;
+            this.fontFamily = fontFamily;
         }
 
         public List<Tag> MakeTags(Dictionary<string, int> frequency)
@@ -24,7 +26,7 @@ namespace TagsCloudVisualization
             {
                 var frontsize = minSize + rangeSize *
                     ((float)word.Value / frequency.Values.Max());
-                var font = new Font(new FontFamily("Arial"),
+                var font = new Font(fontFamily,
                                     frontsize, 
                                     FontStyle.Regular, 
                                     GraphicsUnit.Pixel);

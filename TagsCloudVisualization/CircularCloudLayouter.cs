@@ -8,7 +8,7 @@ namespace TagsCloudVisualization
     public class CircularCloudLayouter : ICircularCloudLayouter
     {
         private Point cloudCenter;
-        private List<Rectangle> rectangles;
+        private readonly List<Rectangle> rectangles;
         private int distance;
 
         public CircularCloudLayouter(Point cloudCenter)
@@ -48,7 +48,7 @@ namespace TagsCloudVisualization
             return points.Current;
         }
 
-        public IEnumerable<Point> GetTop()
+        private IEnumerable<Point> GetTop()
         {
             while (true)
             {

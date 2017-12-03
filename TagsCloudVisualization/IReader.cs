@@ -2,8 +2,8 @@
 
 namespace TagsCloudVisualization
 {
-    public interface IDrawer
+    public interface IReader
     {
-        void DrawTags(List<Tag> tags);
+        IEnumerable<string> ReadFromFile();
     }
 }

@@ -5,8 +5,8 @@ namespace TagsCloudVisualization
 {
     public class Tag
     {
-        public string Word;
-        public Font Font;
+        public readonly string Word;
+        public readonly Font Font;
         public Rectangle Rectangle;
 
         public Tag(string word, Font font, Rectangle rectangle)

@@ -5,28 +5,26 @@ namespace TagsCloudVisualization
 {
     class Drawer : IDrawer
     {
-        public void DrawRectangles(List<Rectangle> rectangles, Point cloudCenter, string fileName, Size size)
-        {
-            var bitmap = new Bitmap(size.Width, size.Height);
-            var g = Graphics.FromImage(bitmap);
-            var pen = new Pen(Color.Blue);
-            g.DrawEllipse(pen, cloudCenter.X-1, cloudCenter.Y-1, 2, 2);
-            foreach (var rectangle in rectangles)
-                g.DrawRectangle(pen, rectangle);
+        private readonly Size size;
+        private readonly string imageName;
+        private readonly Color color;
 
-            g.Dispose();
-            bitmap.Save(fileName);
+        public Drawer(Size size, string imageName, Color color)
+        {
+            this.size = size;
+            this.imageName = imageName;
+            this.color = color;
         }
 
-        public void DrawTags(List<Tag> tags, string fileName, Size size)
+        public void DrawTags(List<Tag> tags)
         {
             var bitmap = new Bitmap(size.Width, size.Height);
             var g = Graphics.FromImage(bitmap);
             foreach (var tag in tags)
-                g.DrawString(tag.Word, tag.Font, new SolidBrush(Color.RoyalBlue),tag.Rectangle.X, tag.Rectangle.Y);
+                g.DrawString(tag.Word, tag.Font, new SolidBrush(color),tag.Rectangle.X, tag.Rectangle.Y);
 
             g.Dispose();
-            bitmap.Save(fileName);
+            bitmap.Save(imageName);
         }
     }
 }

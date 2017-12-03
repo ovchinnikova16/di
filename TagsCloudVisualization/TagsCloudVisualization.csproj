@@ -71,12 +71,14 @@
   <ItemGroup>
     <Compile Include="CircularCloudLayouter.cs" />
     <Compile Include="CircularCloudLayouter_Should.cs" />
-    <Compile Include="Creator.cs" />
+    <Compile Include="CloudMaker.cs" />
     <Compile Include="ICircularCloudLayouter.cs" />
-    <Compile Include="ICreator.cs" />
     <Compile Include="IDrawer.cs" />
     <Compile Include="IParser.cs" />
+    <Compile Include="IReader.cs" />
     <Compile Include="ITagsMaker.cs" />
+    <Compile Include="Reader.cs" />
+    <Compile Include="RectangleLocator.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="TagsMaker.cs" />
     <Compile Include="Drawer.cs" />
