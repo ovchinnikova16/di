@@ -11,9 +11,9 @@ namespace TagsCloudVisualization
         private List<Rectangle> rectangles;
         private int distance;
 
-        public CircularCloudLayouter(Point center)
+        public CircularCloudLayouter(Point cloudCenter)
         {
-            cloudCenter = center;
+            this.cloudCenter = cloudCenter;
             rectangles = new List<Rectangle>();
         }
 
