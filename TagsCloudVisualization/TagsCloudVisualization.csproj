@@ -37,6 +37,10 @@
       <HintPath>..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentAssertions, Version=4.17.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.17.0\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -78,12 +82,13 @@
     <Compile Include="IReader.cs" />
     <Compile Include="IRectangleLocator.cs" />
     <Compile Include="ITagsMaker.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="RectangleLocator.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="TagsMaker.cs" />
     <Compile Include="Drawer.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="WordsParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

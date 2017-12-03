@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using Autofac;
+using CommandLine;
 
 namespace TagsCloudVisualization
 {
@@ -7,13 +8,15 @@ namespace TagsCloudVisualization
     {
         static void Main(string[] args)
         {
+            var options = new Options();
+            if (!Parser.Default.ParseArguments(args, options))
+                return;
+
             var cloudCenter = new Point(250, 250);
-            var size = new Size(cloudCenter.X * 2, cloudCenter.Y * 2);
-            var fileName = "text.txt";
-            var imageName = "cloud.bmp";
+            var size = new Size(options.Width, options.Height);
             var wordsNumber = 100;
             var wordsColor = Color.RoyalBlue;
-            var fontFamily = new FontFamily("Arial");
+            var fontFamily = new FontFamily(options.Font);
 
             var container = new ContainerBuilder();
             container.RegisterType<CircularCloudLayouter>()
@@ -24,8 +27,8 @@ namespace TagsCloudVisualization
                 .WithParameter("cloudCenter", cloudCenter);
             container.RegisterType<Reader>()
                 .As<IReader>()
-                .WithParameter("fileName", fileName);
-            container.RegisterType<Parser>()
+                .WithParameter("fileName", options.FileName);
+            container.RegisterType<WordsParser>()
                 .As<IParser>()
                 .WithParameter("wordsNumber", wordsNumber);
             container.RegisterType<TagsMaker>()
@@ -34,7 +37,7 @@ namespace TagsCloudVisualization
             container.RegisterType<Drawer>()
                 .As<IDrawer>()
                 .WithParameter("size", size)
-                .WithParameter("imageName", imageName)
+                .WithParameter("imageName", options.ImageName)
                 .WithParameter("color", wordsColor);
             container.RegisterType<CloudMaker>()
                 .AsSelf()

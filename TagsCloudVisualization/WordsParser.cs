@@ -4,11 +4,11 @@ using System.Text.RegularExpressions;
 
 namespace TagsCloudVisualization
 {
-    public class Parser : IParser
+    public class WordsParser : IParser
     {
         private readonly int wordsNumber;
 
-        public Parser(int wordsNumber)
+        public WordsParser(int wordsNumber)
         {
             this.wordsNumber = wordsNumber;
         }
