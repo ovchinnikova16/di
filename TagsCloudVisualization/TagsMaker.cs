@@ -9,7 +9,7 @@ namespace TagsCloudVisualization
     {
         private readonly ICircularCloudLayouter cloudLayouter;
 
-        TagsMaker(ICircularCloudLayouter cloudLayouter)
+        public TagsMaker(ICircularCloudLayouter cloudLayouter)
         {
             this.cloudLayouter = cloudLayouter;
         }
