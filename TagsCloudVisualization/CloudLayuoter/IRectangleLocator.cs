@@ -5,6 +5,6 @@ namespace TagsCloudVisualization
 {
     public interface IRectangleLocator
     {
-        Point FindLocation(Size rectangleSize, List<Rectangle> rectangles);
+        Rectangle FindLocation(Size rectangleSize);
     }
 }

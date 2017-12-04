@@ -22,8 +22,7 @@ namespace TagsCloudVisualization
 
             var container = new ContainerBuilder();
             container.RegisterType<CircularCloudLayouter>()
-                .As<ICircularCloudLayouter>()
-                .WithParameter("cloudCenter", cloudCenter);
+                .As<ICircularCloudLayouter>();
             container.RegisterType<RectangleLocator>()
                 .As<IRectangleLocator>()
                 .WithParameter("cloudCenter", cloudCenter);

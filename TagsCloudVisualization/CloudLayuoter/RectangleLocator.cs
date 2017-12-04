@@ -8,19 +8,24 @@ namespace TagsCloudVisualization
     public class RectangleLocator : IRectangleLocator
     {
         private readonly Point cloudCenter;
+        private readonly List<Rectangle> rectangles;
 
         public RectangleLocator(Point cloudCenter)
         {
             this.cloudCenter = cloudCenter;
+            rectangles = new List<Rectangle>();
         }
 
-        public Point FindLocation(Size rectangleSize, List<Rectangle> rectangles)
+        public Rectangle FindLocation(Size rectangleSize)
         {
             if (rectangles.Count == 0)
             {
                 var shiftX = rectangleSize.Width / 2;
                 var shiftY = rectangleSize.Height / 2;
-                return new Point(cloudCenter.X - shiftX, cloudCenter.Y - shiftY);
+                var location = new Point(cloudCenter.X - shiftX, cloudCenter.Y - shiftY);
+                var firstRectangle = new Rectangle(location, rectangleSize);
+                rectangles.Add(firstRectangle);
+                return firstRectangle;
             }
 
             var points = GetTop().GetEnumerator();
@@ -32,7 +37,10 @@ namespace TagsCloudVisualization
                 rectangle.X = points.Current.X;
                 rectangle.Y = points.Current.Y;
             }
-            return points.Current;
+
+            var newRectangle = new Rectangle(points.Current, rectangleSize);
+            rectangles.Add(rectangle);
+            return newRectangle;
         }
 
         private IEnumerable<Point> GetTop()
