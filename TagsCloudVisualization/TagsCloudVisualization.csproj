@@ -193,31 +193,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoringWordsSelector.cs" />
-    <Compile Include="CircularCloudLayouter.cs" />
-    <Compile Include="CircularCloudLayouter_Should.cs" />
+    <Compile Include="FileParser\BoringWordsSelector.cs" />
+    <Compile Include="CloudLayuoter\CircularCloudLayouter.cs" />
+    <Compile Include="CloudLayuoter\CircularCloudLayouter_Should.cs" />
     <Compile Include="CloudMaker.cs" />
-    <Compile Include="ICircularCloudLayouter.cs" />
-    <Compile Include="IDrawer.cs" />
-    <Compile Include="IParser.cs" />
-    <Compile Include="IReader.cs" />
-    <Compile Include="IRectangleLocator.cs" />
-    <Compile Include="ITagsMaker.cs" />
-    <Compile Include="IWordsSelector.cs" />
+    <Compile Include="CloudLayuoter\ICircularCloudLayouter.cs" />
+    <Compile Include="CloudDrawer\IDrawer.cs" />
+    <Compile Include="FileParser\IParser.cs" />
+    <Compile Include="FileParser\IReader.cs" />
+    <Compile Include="CloudLayuoter\IRectangleLocator.cs" />
+    <Compile Include="TagsMaker\ITagsMaker.cs" />
+    <Compile Include="FileParser\IWordsSelector.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="Reader.cs" />
-    <Compile Include="RectangleLocator.cs" />
-    <Compile Include="Tag.cs" />
-    <Compile Include="TagsMaker.cs" />
-    <Compile Include="Drawer.cs" />
-    <Compile Include="WordsParser.cs" />
+    <Compile Include="FileParser\Reader.cs" />
+    <Compile Include="CloudLayuoter\RectangleLocator.cs" />
+    <Compile Include="TagsMaker\Tag.cs" />
+    <Compile Include="TagsMaker\TagsMaker.cs" />
+    <Compile Include="CloudDrawer\Drawer.cs" />
+    <Compile Include="FileParser\WordsParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="en_US.aff" />
-    <None Include="en_US.dic" />
+    <None Include="FileParser\en_US.aff" />
+    <None Include="FileParser\en_US.dic" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

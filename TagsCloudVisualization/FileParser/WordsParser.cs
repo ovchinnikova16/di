@@ -18,7 +18,7 @@ namespace TagsCloudVisualization
 
         public Dictionary<string, int> GetFrequency(IEnumerable<string> text)
         {
-            var hunspell = new Hunspell("en_US.aff", "en_US.dic");
+            var hunspell = new Hunspell("FileParser/en_US.aff", "FileParser/en_US.dic");
 
             var words = getWords(text);
             var notBoringWords = selector.SelectWords(words);
