@@ -4,7 +4,7 @@ namespace TagsCloudVisualization
 {
     public class Options
     {
-        [Option('t', "file", Required = true)]
+        [Option('t', "file", DefaultValue = "text.txt")]
         public string FileName { get; set; }
 
         [Option('i', "image", Required = true, DefaultValue = "cloud.png")]

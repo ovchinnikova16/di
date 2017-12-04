@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using Autofac;
 using CommandLine;
 
@@ -9,14 +10,15 @@ namespace TagsCloudVisualization
         static void Main(string[] args)
         {
             var options = new Options();
-            if (!Parser.Default.ParseArguments(args, options))
-                return;
+            Parser.Default.ParseArguments(args, options);
+
 
             var cloudCenter = new Point(250, 250);
             var size = new Size(options.Width, options.Height);
             var wordsNumber = 100;
             var wordsColor = Color.RoyalBlue;
             var fontFamily = new FontFamily(options.Font);
+            var boringWords = new List<string>() {"that", "this", "with"};
 
             var container = new ContainerBuilder();
             container.RegisterType<CircularCloudLayouter>()
@@ -28,6 +30,9 @@ namespace TagsCloudVisualization
             container.RegisterType<Reader>()
                 .As<IReader>()
                 .WithParameter("fileName", options.FileName);
+            container.RegisterType<BoringWordsSelector>()
+                .As<IWordsSelector>()
+                .WithParameter("boringWords", boringWords);
             container.RegisterType<WordsParser>()
                 .As<IParser>()
                 .WithParameter("wordsNumber", wordsNumber);
