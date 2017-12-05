@@ -21,11 +21,11 @@ namespace TagsCloudVisualization
             var tags = new List<Tag>();
             var minSize = 10;
             var rangeSize = 25;
-
-            foreach (var word in frequency)
+            var freq = frequency.OrderByDescending(x => x.Value);
+            foreach (var word in freq)
             {
                 var frontsize = minSize + rangeSize *
-                    ((float)word.Value / frequency.Values.Max());
+                    ((float)word.Value / freq.First().Value);
                 var font = new Font(fontFamily,
                                     frontsize, 
                                     FontStyle.Regular, 
