@@ -4,6 +4,6 @@ namespace TagsCloudVisualization
 {
     public interface IParser
     {
-        Dictionary<string, int> GetFrequency(IEnumerable<string> text);
+        Dictionary<string, int> GetFrequency(IEnumerable<string> words);
     }
 }

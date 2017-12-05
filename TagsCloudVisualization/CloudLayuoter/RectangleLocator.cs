@@ -28,18 +28,18 @@ namespace TagsCloudVisualization
                 return firstRectangle;
             }
 
-            var points = GetTop().GetEnumerator();
-            points.MoveNext();
-            var rectangle = new Rectangle(points.Current, rectangleSize);
-            while (rectangles.Any(rect => rect.IntersectsWith(rectangle)))
+            var curPoint = new Point();
+            foreach (var point in GetTop())
             {
-                points.MoveNext();
-                rectangle.X = points.Current.X;
-                rectangle.Y = points.Current.Y;
+                var rect = new Rectangle(point, rectangleSize);
+                if (rectangles.Any(r => r.IntersectsWith(rect)))
+                    continue;
+                curPoint = point;
+                break;
             }
 
-            var newRectangle = new Rectangle(points.Current, rectangleSize);
-            rectangles.Add(rectangle);
+            var newRectangle = new Rectangle(curPoint, rectangleSize);
+            rectangles.Add(newRectangle);
             return newRectangle;
         }
 

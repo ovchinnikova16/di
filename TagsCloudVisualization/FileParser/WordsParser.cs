@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using NHunspell;
 
 namespace TagsCloudVisualization
@@ -16,11 +15,10 @@ namespace TagsCloudVisualization
             this.selector = selector;
         }
 
-        public Dictionary<string, int> GetFrequency(IEnumerable<string> text)
+        public Dictionary<string, int> GetFrequency(IEnumerable<string> words)
         {
             var hunspell = new Hunspell("en_US.aff", "en_US.dic");
 
-            var words = getWords(text);
             var notBoringWords = selector.SelectWords(words);
             return notBoringWords
                 .Select(x =>
@@ -32,17 +30,6 @@ namespace TagsCloudVisualization
                 .OrderByDescending(w => w.Count())
                 .Take(wordsNumber)
                 .ToDictionary(w => w.Key, w => w.Count());
-        }
-
-        private IEnumerable<string> getWords(IEnumerable<string> text)
-        {
-            foreach (var line in text)
-            {
-                var reg = new Regex(@"[A-Za-z']*");
-                var words = reg.Matches(line);
-                foreach (Match word in words)
-                    yield return word.Value.ToLower();
-            }
         }
     }
 }
