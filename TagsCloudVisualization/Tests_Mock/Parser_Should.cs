@@ -10,7 +10,6 @@ namespace TagsCloudVisualization.Tests
         public void WordsParser_GetFreqency()
         {
             var selector = new Mock<IWordsSelector>();
-            var reader = new Mock<IReader>();
             var parser = new WordsParser(100, selector.Object);
             var text = new Reader("text.txt").ReadFromFile();
             parser.GetFrequency(text);
