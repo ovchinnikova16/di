@@ -7,11 +7,19 @@ namespace TagsCloudVisualization.Tests
     [TestFixture]
     public class CircularCloudLayouter_Should
     {
+        private Mock<IRectangleLocator> locator;
+        private CircularCloudLayouter layouter;
+
+        [SetUp]
+        public void SetUp()
+        {
+            locator = new Mock<IRectangleLocator>();
+            layouter = new CircularCloudLayouter(locator.Object);
+        }
+
         [Test]
         public void CircularCloudLayouter_PutOneRectangle()
         {
-            var locator = new Mock<IRectangleLocator>();
-            var layouter = new CircularCloudLayouter(locator.Object);
             layouter.PutNextRectangle(new Size(2, 2));
             locator.Verify(lw => lw.FindLocation(new Size(2, 2)), Times.Once());
         }
@@ -19,8 +27,6 @@ namespace TagsCloudVisualization.Tests
         [Test]
         public void CircularCloudLayouter_PutSeveralRectangles()
         {
-            var locator = new Mock<IRectangleLocator>();
-            var layouter = new CircularCloudLayouter(locator.Object);
             layouter.PutNextRectangle(new Size(2, 2));
             layouter.PutNextRectangle(new Size(2, 2));
             locator.Verify(loc => loc.FindLocation(new Size(2, 2)), Times.Exactly(2));

@@ -17,21 +17,24 @@ namespace TagsCloudVisualization.Tests
         {
             selector = new Mock<IWordsSelector>();
             parser = new WordsParser(2, selector.Object);
+            selector.Setup(s => s.SelectWords(It.IsAny<IEnumerable<string>>()))
+                .Returns<IEnumerable<string>>(w => w);
+
         }
         [Test]
         public void WordsParser_GetFreqency_SelectorCallsOnse()
         {
-            var text = new Reader("text.txt").ReadFromFile();
-            parser.GetFrequency(text);
-            selector.Verify(r => r.SelectWords(text), Times.Once());
+            var words = new List<string> { "test", "tests" }.AsEnumerable();
+
+            parser.GetFrequency(words);
+
+            selector.Verify(r => r.SelectWords(words), Times.Once());
         }
 
         [Test]
         public void WordsParser_GetFreqency_CorrectInitialForm()
         {
-            var words = new List<string>() {"test", "tests"}.AsEnumerable();
-            selector.Setup(s => s.SelectWords(It.IsAny<IEnumerable<string>>()))
-                .Returns<IEnumerable<string>>(w => w);
+            var words = new List<string> {"test", "tests"}.AsEnumerable();
 
             var frequency = parser.GetFrequency(words);
 
@@ -42,9 +45,7 @@ namespace TagsCloudVisualization.Tests
         [Test]
         public void WordsParser_GetFreqency_CorrectWordsNumber()
         {
-            var words = new List<string>() { "test", "tests", "qwer", "zxcv" }.AsEnumerable();
-            selector.Setup(s => s.SelectWords(It.IsAny<IEnumerable<string>>()))
-                .Returns<IEnumerable<string>>(w => w);
+            var words = new List<string> { "test", "tests", "qwer", "zxcv" }.AsEnumerable();
 
             var frequency = parser.GetFrequency(words);
 
