@@ -32,7 +32,8 @@ namespace TagsCloudVisualization
                                     GraphicsUnit.Pixel);
                 var rectangleSize = TextRenderer.MeasureText(word.Key, font);
                 var rectangle = cloudLayouter.PutNextRectangle(rectangleSize);
-                tags.Add(new Tag(word.Key, font, rectangle));
+                if (rectangle.IsSuccess)
+                    tags.Add(new Tag(word.Key, font, rectangle.Value));
             }
 
             return tags;

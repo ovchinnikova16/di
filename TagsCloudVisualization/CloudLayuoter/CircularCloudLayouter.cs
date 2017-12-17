@@ -12,13 +12,12 @@ namespace TagsCloudVisualization
             this.rectangleLocator = rectangleLocator;
         }
 
-        public Rectangle PutNextRectangle(Size rectangleSize)
+        public Result<Rectangle> PutNextRectangle(Size rectangleSize)
         {
             if (rectangleSize.Width <= 0 || rectangleSize.Height <= 0)
-                throw new ArgumentException("Rectangle size is not positive");
+                return Result.Fail<Rectangle>("Size of rectangle is negative");
 
-            var rectangle = rectangleLocator.FindLocation(rectangleSize);
-            return rectangle;
+            return Result.Ok(rectangleLocator.FindLocation(rectangleSize));
         }
     }
 }

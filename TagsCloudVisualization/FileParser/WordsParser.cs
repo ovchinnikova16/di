@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NHunspell;
+using System;
 
 namespace TagsCloudVisualization
 {
@@ -16,14 +17,16 @@ namespace TagsCloudVisualization
         }
 
         public Dictionary<string, int> GetFrequency(IEnumerable<string> words)
-        {
-            var hunspell = new Hunspell("en_US.aff", "en_US.dic");
 
+        {
+            var hunspell = Result.Of(() => new Hunspell("en_US.aff", "en_US.dic"));
+            if (!hunspell.IsSuccess)
+                ErrorPrinter.PrintError(hunspell.Error);
             var notBoringWords = selector.SelectWords(words);
             return notBoringWords
                 .Select(x =>
                 {
-                    var stems = hunspell.Stem(x);
+                    var stems = hunspell.Value.Stem(x);
                     return stems.Any() ? stems[0] : x;
                 })
                 .GroupBy(w => w)
@@ -33,3 +36,4 @@ namespace TagsCloudVisualization
         }
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace TagsCloudVisualization
@@ -21,10 +22,24 @@ namespace TagsCloudVisualization
             var bitmap = new Bitmap(size.Width, size.Height);
             var g = Graphics.FromImage(bitmap);
             foreach (var tag in tags)
-                g.DrawString(tag.Word, tag.Font, new SolidBrush(color),tag.Rectangle.X, tag.Rectangle.Y);
+            {
+                var location = Result.Of(() => checkTagLocation(tag.Rectangle));
+                if (!location.IsSuccess)
+                    ErrorPrinter.PrintError(location.Error);
 
+                g.DrawString(tag.Word, tag.Font, new SolidBrush(color), tag.Rectangle.X, tag.Rectangle.Y);
+            }
             g.Dispose();
             bitmap.Save(imageName);
+        }
+
+        private bool checkTagLocation(Rectangle rectangle)
+        {
+            if (rectangle.Left < 0 || rectangle.Right > size.Width
+                || rectangle.Top < 0 || rectangle.Bottom > size.Height)
+                throw new Exception
+                    ($"Tag location (x:{rectangle.X}, y:{rectangle.Y}) is out of image.");
+            return true;
         }
     }
 }

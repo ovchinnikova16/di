@@ -201,6 +201,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorPrinter.cs" />
     <Compile Include="FileParser\BoringWordsSelector.cs" />
     <Compile Include="CloudLayuoter\CircularCloudLayouter.cs" />
     <Compile Include="CloudLayuoter\CircularCloudLayouter_Should.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="FileParser\IParser.cs" />
     <Compile Include="FileParser\IReader.cs" />
     <Compile Include="CloudLayuoter\IRectangleLocator.cs" />
+    <Compile Include="Result.cs" />
     <Compile Include="TagsMaker\ITagsMaker.cs" />
     <Compile Include="FileParser\IWordsSelector.cs" />
     <Compile Include="Options.cs" />
@@ -238,7 +240,7 @@
     <None Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Hunspellx86.dll">
+    <None Include="Tests_Mock\Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="text.txt" />

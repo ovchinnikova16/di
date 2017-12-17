@@ -24,9 +24,9 @@ namespace TagsCloudVisualization
 
             var rectangle = cloud.PutNextRectangle(new Size(width, height));
 
-            rectangle.Size.ShouldBeEquivalentTo(new Size(width, height));
-            rectangle.X.Should().Be(topX);
-            rectangle.Y.Should().Be(topY);
+            rectangle.Value.Size.ShouldBeEquivalentTo(new Size(width, height));
+            rectangle.Value.X.Should().Be(topX);
+            rectangle.Value.Y.Should().Be(topY);
         }
 
         [TestCase(4, 4, 3, 3)]
@@ -38,7 +38,7 @@ namespace TagsCloudVisualization
             var firstRectangle = cloud.PutNextRectangle(new Size(size1X, size1Y));
             var secondRectangle = cloud.PutNextRectangle(new Size(size2X, size2Y));
 
-            firstRectangle.IntersectsWith(secondRectangle).Should().BeFalse();
+            firstRectangle.Value.IntersectsWith(secondRectangle.Value).Should().BeFalse();
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace TagsCloudVisualization
             var rectangles = new List<Rectangle>();
 
             for (int i = 0; i < 5; i++)
-                rectangles.Add(cloud.PutNextRectangle(new Size(2, 2)));
+                rectangles.Add(cloud.PutNextRectangle(new Size(2, 2)).Value);
 
             foreach (var rectangle in rectangles)
             {
